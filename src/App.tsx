@@ -6,6 +6,7 @@ import LogWorkoutPage from './pages/LogWorkout';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ToastNotifications from './components/ToastNotifications';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -43,7 +44,7 @@ const App: React.FC = () => {
           />
         </Routes>
       </AnimatePresence>
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+      <ToastNotifications />
     </div>
   );
 };

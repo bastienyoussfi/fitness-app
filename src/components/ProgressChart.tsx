@@ -1,7 +1,14 @@
 import React from 'react';
 import Workout from '../types/workout';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
 } from 'recharts';
 import { motion } from 'framer-motion';
 
@@ -20,18 +27,20 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ workouts }) => {
     return acc;
   }, {});
 
-  const chartData = Object.values(data).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const chartData = Object.values(data).sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
   return (
     <motion.div
-      className="mt-6 bg-white p-6 rounded shadow-md"
+      className="bg-surface p-6 rounded-lg shadow-md"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <h2 className="text-lg font-semibold mb-4">Workout Progress</h2>
+      <h2 className="text-lg font-semibold text-primary mb-4">Workout Progress</h2>
       {chartData.length === 0 ? (
-        <p className="text-gray-500">No data to display.</p>
+        <p className="text-onSurface">No data to display.</p>
       ) : (
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData}>
@@ -43,7 +52,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ workouts }) => {
             <Line
               type="monotone"
               dataKey="duration"
-              stroke="#8884d8"
+              stroke="#1D4ED8"
               name="Duration (min)"
               strokeWidth={2}
               activeDot={{ r: 8 }}
@@ -52,7 +61,7 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ workouts }) => {
             <Line
               type="monotone"
               dataKey="calories"
-              stroke="#82ca9d"
+              stroke="#9333EA"
               name="Calories Burned"
               strokeWidth={2}
               activeDot={{ r: 8 }}

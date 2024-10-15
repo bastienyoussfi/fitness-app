@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 import { motion } from 'framer-motion';
-import Avatar from './Avatar';
+import { FaUser, FaStar } from 'react-icons/fa';
 
 const UserProfile: React.FC = () => {
   const { user } = useContext(AppContext);
@@ -16,25 +16,32 @@ const UserProfile: React.FC = () => {
 
   return (
     <motion.div
-      className="bg-white p-6 rounded shadow-md flex items-center space-x-4"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
+      className="bg-surface p-6 rounded-lg shadow-md flex flex-col items-center space-y-4"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <Avatar />
-      <div>
+      <div className="w-24 h-24 rounded-full bg-primary flex items-center justify-center text-white text-4xl">
+        <FaUser />
+      </div>
+      <div className="text-center">
         <h2 className="text-xl font-semibold text-primary">{user.name}</h2>
-        <p className="text-sm text-gray-600">Level: {user.level}</p>
-        <div className="w-full bg-gray-200 rounded-full h-4 mt-2">
+        <p className="text-sm text-onSurface">Level: {user.level}</p>
+      </div>
+      <div className="w-full">
+        <div className="w-full bg-gray-200 rounded-full h-4">
           <div
             className="bg-primary h-4 rounded-full transition-all duration-500"
             style={{ width: `${progress}%` }}
           ></div>
         </div>
-        <p className="text-sm mt-1 text-gray-600">
+        <p className="text-sm text-onSurface mt-1">
           {user.xp} / {nextLevelXP} XP
         </p>
-        <p className="text-sm text-gray-600">Streak: {user.streak} day(s)</p>
+      </div>
+      <div className="flex items-center space-x-2">
+        <FaStar className="text-accent" />
+        <span className="text-sm text-onSurface">Streak: {user.streak} day(s)</span>
       </div>
     </motion.div>
   );

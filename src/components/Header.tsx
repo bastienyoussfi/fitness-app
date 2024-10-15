@@ -1,17 +1,46 @@
-// src/components/Header.tsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from 'react-router-dom';
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-blue-600 text-white p-4 flex justify-between">
-      <h1 className="text-xl font-bold">Fitness Tracker</h1>
-      <nav>
-        <Link to="/" className="mr-4">
-          Dashboard
+    <header className="bg-surface shadow-md">
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <Link to="/" className="text-primary text-2xl font-bold">
+          FitnessTracker
         </Link>
-        <Link to="/log-workout">Log Workout</Link>
-      </nav>
+        <nav className="space-x-4">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-primary font-semibold'
+                : 'text-onSurface hover:text-primary transition'
+            }
+          >
+            Dashboard
+          </NavLink>
+          <NavLink
+            to="/log-workout"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-primary font-semibold'
+                : 'text-onSurface hover:text-primary transition'
+            }
+          >
+            Log Workout
+          </NavLink>
+          <NavLink
+            to="/achievements"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-primary font-semibold'
+                : 'text-onSurface hover:text-primary transition'
+            }
+          >
+            Achievements
+          </NavLink>
+        </nav>
+      </div>
     </header>
   );
 };
