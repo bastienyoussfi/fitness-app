@@ -1,7 +1,7 @@
 // src/pages/LogWorkout.tsx
-import React, { useContext } from 'react';
-import WorkoutForm from '../components/WorkoutForm';
-import { AppContext } from '../context/AppContext';
+import React, { useContext } from "react";
+import WorkoutForm from "../components/WorkoutForm";
+import { AppContext } from "../context/AppContext";
 
 const LogWorkoutPage: React.FC = () => {
   const { addWorkout } = useContext(AppContext);

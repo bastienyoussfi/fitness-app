@@ -1,17 +1,20 @@
 // src/components/WorkoutForm.tsx
-import React, { useState } from 'react';
-import Workout from '../types/workout';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState } from "react";
+import Workout from "../types/workout";
+import { v4 as uuidv4 } from "uuid";
+import { motion } from 'framer-motion';
 
 interface WorkoutFormProps {
   addWorkout: (workout: Workout) => void;
 }
 
 const WorkoutForm: React.FC<WorkoutFormProps> = ({ addWorkout }) => {
-  const [type, setType] = useState('');
+  const [type, setType] = useState("");
   const [duration, setDuration] = useState<number>(0);
   const [caloriesBurned, setCaloriesBurned] = useState<number>(0);
-  const [date, setDate] = useState<string>(new Date().toISOString().split('T')[0]);
+  const [date, setDate] = useState<string>(
+    new Date().toISOString().split("T")[0],
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,10 +27,10 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({ addWorkout }) => {
     };
     addWorkout(newWorkout);
     // Reset form
-    setType('');
+    setType("");
     setDuration(0);
     setCaloriesBurned(0);
-    setDate(new Date().toISOString().split('T')[0]);
+    setDate(new Date().toISOString().split("T")[0]);
   };
 
   return (
@@ -76,9 +79,15 @@ const WorkoutForm: React.FC<WorkoutFormProps> = ({ addWorkout }) => {
           className="w-full border px-3 py-2 rounded"
         />
       </div>
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-        Add Workout
-      </button>
+      <motion.button
+  type="submit"
+  className="bg-primary text-white px-4 py-2 rounded"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  transition={{ type: 'spring', stiffness: 300 }}
+>
+  Add Workout
+</motion.button>
     </form>
   );
 };

@@ -1,9 +1,9 @@
-// src/components/ProgressChart.tsx
 import React from 'react';
 import Workout from '../types/workout';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
+import { motion } from 'framer-motion';
 
 interface ProgressChartProps {
   workouts: Workout[];
@@ -23,10 +23,15 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ workouts }) => {
   const chartData = Object.values(data).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
-    <div className="mt-6 bg-white p-6 rounded shadow-md">
+    <motion.div
+      className="mt-6 bg-white p-6 rounded shadow-md"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
       <h2 className="text-lg font-semibold mb-4">Workout Progress</h2>
       {chartData.length === 0 ? (
-        <p>No data to display.</p>
+        <p className="text-gray-500">No data to display.</p>
       ) : (
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={chartData}>
@@ -35,12 +40,28 @@ const ProgressChart: React.FC<ProgressChartProps> = ({ workouts }) => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="duration" stroke="#8884d8" name="Duration (min)" />
-            <Line type="monotone" dataKey="calories" stroke="#82ca9d" name="Calories Burned" />
+            <Line
+              type="monotone"
+              dataKey="duration"
+              stroke="#8884d8"
+              name="Duration (min)"
+              strokeWidth={2}
+              activeDot={{ r: 8 }}
+              animationDuration={1000}
+            />
+            <Line
+              type="monotone"
+              dataKey="calories"
+              stroke="#82ca9d"
+              name="Calories Burned"
+              strokeWidth={2}
+              activeDot={{ r: 8 }}
+              animationDuration={1000}
+            />
           </LineChart>
         </ResponsiveContainer>
       )}
-    </div>
+    </motion.div>
   );
 };
 
